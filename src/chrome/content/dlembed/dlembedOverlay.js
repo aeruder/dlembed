@@ -1,7 +1,9 @@
 // All code below is GPL
 // Author: Andrew Ruder unless otherwise noted.
 
-window.addEventListener("focus", dlembed_updateicon, false);
+window.addEventListener("load", function(evt) { 
+	alert("Blah");
+}, true);
 
 function dlembed_addwindowlistener() {
 	alert("Blah: " + self + window + document + window._content);
