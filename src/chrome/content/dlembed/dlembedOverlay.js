@@ -67,10 +67,12 @@ function get_all_embedded() {
 function dlembed_dlall() {
 	var embeds = get_all_embedded();
 	var i = 0;
+	var url;
 	for (i = 0; i < embeds.length; i++) {
-		var url = makeURLAbsolute(embeds[i][1].baseURI, embeds[i][0].src);
-		saveURL(url, "");
+		url = makeURLAbsolute(embeds[i][1].baseURI, embeds[i][0].src);
+		setTimeout("saveURL(\""+url+"\", null, null, false, true, null)", 0);
 	}
+
 }
 
 function dlembed_viewall() {
