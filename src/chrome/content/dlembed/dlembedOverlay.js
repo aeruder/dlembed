@@ -57,7 +57,7 @@ function get_all_embedded() {
 	for (var j = 0; j < docs.length; j++) {
 		var this_embeds = docs[j].getElementsByTagName("embed");
 		for (var k = 0; k < this_embeds.length; k++) {
-			embeds.push(this_embeds[k]);
+			embeds.push([this_embeds[k], docs[j]]);
 		}
 	}
 
@@ -68,8 +68,12 @@ function dlembed_dlall() {
 	var embeds = get_all_embedded();
 	var i = 0;
 	for (i = 0; i < embeds.length; i++) {
-		
-		
+		var url = makeURLAbsolute(embeds[i][1].baseURI, embeds[i][0].src);
+		saveURL(url, "");
+	}
+}
+
+function dlembed_viewall() {
 }
 
 window.addEventListener("load", function(evt) { 
