@@ -35,6 +35,6 @@ function dlembed() {
 		}
 	}
 	if (count == 0) {
-		alert("No embedded elements found.");
+		alert("No embedded objects found.");
 	}
 }

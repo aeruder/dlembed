@@ -21,12 +21,12 @@ xmlns:chrome="http://www.mozilla.org/rdf/chrome#">
 	</RDF:Seq>
 
 	<RDF:Description RDF:about="urn:mozilla:package:dlembed"
-		chrome:displayName="Download Embedded 0.2"
+		chrome:displayName="Download Embedded 0.1"
 		chrome:author="Andrew Ruder"
 		chrome:authorURL="mailto:aeruder@ksu.edu"
 		chrome:name="dlembed"
 		chrome:extension="true"
-		chrome:description="Downloads all embedded files on a webpage.">
+		chrome:description="Downloads all embedded objects on a webpage.">
 	</RDF:Description>
 
 </RDF:RDF>
