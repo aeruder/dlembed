@@ -29,6 +29,7 @@ function dlembed() {
 		embeds = docs[j].getElementsByTagName("embed");
 		
 		for (k = 0; k < embeds.length; k++) {
+			count++;
 			url = makeURLAbsolute(docs[j].baseURI, embeds[k].src);
 //			alert("Embed #" + k + " '" + embeds[k].src + "' => " + url);
 			saveURL(url, "");
