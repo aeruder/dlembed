@@ -11,5 +11,4 @@ mkdir chrome
 ( cd ../src/chrome ; find . | grep -v '/\.' | zip -9 -@ ../../build/chrome/dlembed.jar  )
 cp ../src/*.* . 
 find . | grep -v '/\.' | zip -9 -@ ../dlembed.xpi
-cd .. ; rm -fr build
 
