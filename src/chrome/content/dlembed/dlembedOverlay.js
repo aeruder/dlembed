@@ -1,10 +1,16 @@
 // All code below is GPL
 // Author: Andrew Ruder unless otherwise noted.
 
+window.addEventListener("focus", dlembed_updateicon, false);
+
+function dlembed_addwindowlistener() {
+	alert("Blah: " + self + window + document + window._content);
+	window._content.addEventListener("load", dlembed_updateicon, true);
+}
+	
 // Gets all the documents from the current page
 // This function is Copyright(C) Chris Pederick
-function webdeveloper_getDocuments(frame, documentList)
-{
+function webdeveloper_getDocuments(frame, documentList) {
     const framesList = frame.frames;
 
     documentList.push(frame.document);
@@ -18,24 +24,34 @@ function webdeveloper_getDocuments(frame, documentList)
     return documentList;
 }
 
-// This is our javascript which will download all embedded elements
-function dlembed() {
-	docs = webdeveloper_getDocuments(window.content, new Array());
-//	alert("Entering function");
-	
-	count = 0;
-	for (j = 0; j < docs.length; j++) {
-//		alert("Document #" + j);
-		embeds = docs[j].getElementsByTagName("embed");
+function get_all_embedded() {
+	var docs = webdeveloper_getDocuments(window.content, new Array());
+	var embeds = new Array();
 		
-		for (k = 0; k < embeds.length; k++) {
-			count++;
-			url = makeURLAbsolute(docs[j].baseURI, embeds[k].src);
-//			alert("Embed #" + k + " '" + embeds[k].src + "' => " + url);
-			saveURL(url, "");
+	count = 0;
+	for (var j = 0; j < docs.length; j++) {
+		var this_embeds = docs[j].getElementsByTagName("embed");
+		for (var k = 0; k < this_embeds.length; k++) {
+			embeds.push(this_embeds[k]);
 		}
 	}
-	if (count == 0) {
-		alert("No embedded objects found.");
+
+	return embeds;
+}
+
+function dlembed_updateicon() {
+	var docs = webdeveloper_getDocuments(window.content, new Array());
+	var embeds = get_all_embedded();
+	var icon = document.getElementById("dlembed-button");
+	window.content.dump("Hello, world!");
+	if (embeds.length == 0) {
+		// icon.setAttribute("status", "no_items");
+	} else {
+		// icon.setAttribute("status", "has_items");
 	}
+}
+
+function dlembed_dlall() {
+	var embeds = get_all_embedded();
+	alert("There are " + embeds.length + " embedded objects");
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<?xml-stylesheet href="chrome://dlembed/skin/dlembed.css" type="text/css"?>
 
 <overlay id="dlembedOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -10,20 +11,14 @@
 </script>
 
 
-// This is for the right click menu.
-
-<popup id="contentAreaContextMenu">
-  <menuitem id="dlembed" label="Download Embedded" accesskey="b" 
-  insertafter="context-stop" oncommand="dlembed();"/>
-</popup>
-
-
-// This is for the Tools menu.
-
-<menupopup id="menu_ToolsPopup">
-	<menuitem insertafter="devToolsSeparator" label="Download Embedded"
-	accesskey="b" oncommand="dlembed();" />	
-</menupopup>
+<statusbar id="status-bar">
+	<statusbarpanel id="dlembed-button" class="statusbarpanel-menu-iconic" type="menu" status="none">
+		<menupopup>
+		<menuitem id="dlembed-dlall" label="Download all embedded items" oncommand="dlembed_dlall();" />
+		<menuitem id="dlembed-viewall" label="View embedded items" oncommand="dlembed_viewall();" />
+		</menupopup>
+	</statusbarpanel>
+</statusbar>
 
 </overlay>
 

@@ -1,0 +1,6 @@
+statusbarpanel#dlembed-button {
+	list-style-image: url("chrome://dlembed/skin/dlembed_status.png");
+}
+statusbarpanel#dlembed-button[status="no_items"] {
+	display: none;
+}
