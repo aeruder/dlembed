@@ -23,6 +23,7 @@ function dlembed() {
 	docs = webdeveloper_getDocuments(window.content, new Array());
 //	alert("Entering function");
 	
+	count = 0;
 	for (j = 0; j < docs.length; j++) {
 //		alert("Document #" + j);
 		embeds = docs[j].getElementsByTagName("embed");
@@ -32,5 +33,8 @@ function dlembed() {
 //			alert("Embed #" + k + " '" + embeds[k].src + "' => " + url);
 			saveURL(url, "");
 		}
+	}
+	if (count == 0) {
+		alert("No embedded elements found.");
 	}
 }

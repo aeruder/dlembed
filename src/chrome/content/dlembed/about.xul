@@ -24,8 +24,6 @@
         onclick="window.open('http://extensions.aeruder.net'); window.close();"/>
   <separator class="thin"/>
 </vbox>
-<spring flex="1"/>
-<image src="chrome://dlembed/skin/dlembedb.png"/>
 </groupbox>
 
   <hbox>

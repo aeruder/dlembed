@@ -11,7 +11,6 @@ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 		<em:description>Downloads all embedded objects on a webpage.</em:description>
 		<em:creator>Andrew Ruder</em:creator>
 		<em:homepageURL>http://extensions.aeruder.net</em:homepageURL>
-		<em:iconURL>chrome://dlembed/skin/dlembed.png</em:iconURL>
 		<em:aboutURL>chrome://dlembed/content/about.xul</em:aboutURL>
 <!--		<em:updateURL>http://extensions.aeruder.net/update.rdf</em:updateURL> -->
 		<em:file>
