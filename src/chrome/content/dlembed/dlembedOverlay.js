@@ -1,15 +1,6 @@
 // All code below is GPL
 // Author: Andrew Ruder unless otherwise noted.
 
-window.addEventListener("load", function(evt) { 
-	alert("Blah");
-}, true);
-
-function dlembed_addwindowlistener() {
-	alert("Blah: " + self + window + document + window._content);
-	window._content.addEventListener("load", dlembed_updateicon, true);
-}
-	
 // Gets all the documents from the current page
 // This function is Copyright(C) Chris Pederick
 function webdeveloper_getDocuments(frame, documentList) {
@@ -24,6 +15,38 @@ function webdeveloper_getDocuments(frame, documentList) {
     }
 
     return documentList;
+}
+
+function update_dlembedicon() {
+	var icon = document.getElementById("dlembed-button");
+	var embeds = num_embedded();
+	if (embeds == 0) {
+		icon.setAttribute("status", "no_items");
+	} else {
+		icon.setAttribute("status", "has_items");
+	}
+	switch(embeds) {
+		case 0:
+			icon.setAttribute("status", "no_items");
+			icon.setAttribute("tooltiptext", 
+			   "0 embedded objects");
+			break;
+		case 1:
+			icon.setAttribute("tooltiptext",
+			   "1 embedded object");
+			icon.setAttribute("status", "has_items");
+			break;
+		default:
+			icon.setAttribute("status", "has_items");
+			icon.setAttribute("tooltiptext",
+			   embeds + " embedded objects");
+			break;
+	}
+}
+	
+function num_embedded() {
+	var dlembedded_els = get_all_embedded();
+	return dlembedded_els.length;
 }
 
 function get_all_embedded() {
@@ -41,19 +64,20 @@ function get_all_embedded() {
 	return embeds;
 }
 
-function dlembed_updateicon() {
-	var docs = webdeveloper_getDocuments(window.content, new Array());
-	var embeds = get_all_embedded();
-	var icon = document.getElementById("dlembed-button");
-	window.content.dump("Hello, world!");
-	if (embeds.length == 0) {
-		// icon.setAttribute("status", "no_items");
-	} else {
-		// icon.setAttribute("status", "has_items");
-	}
-}
-
 function dlembed_dlall() {
 	var embeds = get_all_embedded();
-	alert("There are " + embeds.length + " embedded objects");
+	var i = 0;
+	for (i = 0; i < embeds.length; i++) {
+		
+		
 }
+
+window.addEventListener("load", function(evt) { 
+	update_dlembedicon();
+	return true;
+}, true);
+
+window.addEventListener("focus", function(evt) {
+	update_dlembedicon();
+	return true;
+}, true);
