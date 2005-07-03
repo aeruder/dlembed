@@ -14,7 +14,7 @@ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 		<em:aboutURL>chrome://dlembed/content/about.xul</em:aboutURL>
 		<em:updateURL>http://extensions.aeruder.net/update.rdf</em:updateURL>
 		<em:file>
-			<Description about="urn:mozilla:extension:file:dlembed.jar">
+			<Description about="urn:mozilla:extension:file:dlembed">
 				<em:package>content/dlembed/</em:package>
 				<em:skin>skin/classic/dlembed/</em:skin>
 			</Description>
