@@ -20,11 +20,6 @@ function webdeveloper_getDocuments(frame, documentList) {
 function update_dlembedicon() {
 	var icon = document.getElementById("dlembed-button");
 	var embeds = num_embedded();
-	if (embeds == 0) {
-		icon.setAttribute("status", "no_items");
-	} else {
-		icon.setAttribute("status", "has_items");
-	}
 	switch(embeds) {
 		case 0:
 			icon.setAttribute("status", "no_items");
@@ -49,6 +44,31 @@ function num_embedded() {
 	return dlembedded_els.length;
 }
 
+const nsIWindowMediator = Components.interfaces.nsIWindowMediator;
+
+/* This is from the tasksOverlay.js from mozilla 
+ */
+function open_dlmanager() {
+	var dlmgr = Components.classes['@mozilla.org/download-manager;1'].getService(Components.interfaces.nsIDownloadManager); 
+
+	var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService();
+	windowMediator = windowMediator.QueryInterface(nsIWindowMediator);
+
+	var dlmgrWindow = windowMediator.getMostRecentWindow("Download:Manager");
+	if (dlmgrWindow) {
+		dlmgrWindow.focus();
+	} 
+	else {
+		try {
+			dump("Stupid dlmgr: " + dlmgr);
+			dlmgr.open(null, null);
+		}
+		catch(e) {
+			dump("Exception " + e + " when doing dlmgr.open in dlembed");
+		}
+	}
+}
+
 function get_all_embedded() {
 	var docs = webdeveloper_getDocuments(window.content, new Array());
 	var embeds = new Array();
@@ -64,15 +84,28 @@ function get_all_embedded() {
 	return embeds;
 }
 
+function download_urls(url_list, index) {
+	if (index == url_list.length) return;
+	window.setTimeout(function() {
+		saveURL(url_list[index], "");
+		download_urls(url_list, index + 1);
+	}, 100);
+}
+
 function dlembed_dlall() {
 	var embeds = get_all_embedded();
+	if (embeds.length == 0) return;
 	var i = 0;
 	var url;
+	var url_list = new Array();
 	for (i = 0; i < embeds.length; i++) {
 		url = makeURLAbsolute(embeds[i][1].baseURI, embeds[i][0].src);
-		setTimeout("saveURL(\""+url+"\", null, null, false, true, null)", 0);
+		url_list.push(url);
 	}
-
+	open_dlmanager();
+	window.setTimeout(function() { 
+		download_urls(url_list, 0); 
+	}, 100);
 }
 
 function dlembed_viewall() {
