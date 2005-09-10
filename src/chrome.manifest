@@ -1,0 +1,4 @@
+content dlembed chrome/dlembed/content/dlembed/ xpcnativewrappers=yes
+skin    dlembed classic/1.0 chrome/dlembed/skin/classic/dlembed/
+
+overlay chrome://browser/content/browser.xul chrome://dlembed/content/dlembedOverlay.xul
