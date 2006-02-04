@@ -11,7 +11,7 @@
 <script type="application/x-javascript" src="chrome://dlembed/content/dlembedOverlay.js" />
 
 <vbox flex="1" >
-	<listbox flex="1" id="dlembed_vu_list"/>
+	<listbox flex="1" id="dlembed_vu_list" seltype="multiple" />
 	<hbox>
 		<spacer flex="1"/>
 		<button id="dlembed_vu_dl" label="Download" onclick="dlembed_vu_dl_item();" />

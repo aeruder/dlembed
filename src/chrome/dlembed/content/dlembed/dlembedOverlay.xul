@@ -9,8 +9,8 @@
 <statusbar id="status-bar">
 	<statusbarpanel id="dlembed-button" class="statusbarpanel-menu-iconic" type="menu" status="no_items">
 		<menupopup>
-		<menuitem id="dlembed-dlall" label="Download all embedded items" oncommand="dlembed_dlall();" />
 		<menuitem id="dlembed-viewall" label="View embedded items" oncommand="dlembed_viewall();" />
+		<menuitem id="dlembed-dlall" label="Download all embedded items" oncommand="dlembed_dlall();" />
 		</menupopup>
 	</statusbarpanel>
 </statusbar>
