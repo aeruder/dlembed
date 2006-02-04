@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window 
+	orient="vertical" 
+	id="dlembed_vu_win"
+	title="Embedded Objects"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" 
+	onload="dlembed_vu_win_load();">
+
+<script type="application/x-javascript" src="chrome://dlembed/content/dlembedOverlay.js" />
+
+<vbox flex="1" >
+	<listbox flex="1" id="dlembed_vu_list"/>
+	<hbox>
+		<spacer flex="1"/>
+		<button id="dlembed_vu_dl" label="Download" onclick="dlembed_vu_dl_item();" />
+	</hbox>
+</vbox>
+
+</window>

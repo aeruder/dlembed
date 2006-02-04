@@ -3,23 +3,30 @@
 
 // Gets all the documents from the current page
 // This function is Copyright(C) Chris Pederick
-function webdeveloper_getDocuments(frame, documentList) {
-    const framesList = frame.frames;
+function dlembed_getdocuments(frame, documentList) {
+    var dlembed_framesList;
+	
+	if (!frame) return documentList;
+	
+	dlembed_framesList  = frame.frames;
 
     documentList.push(frame.document);
 
     // Loop through the frames
-    for(var i = 0; i < framesList.length; i++)
+    for(var i = 0; i < dlembed_framesList.length; i++)
     {
-        webdeveloper_getDocuments(framesList[i], documentList);
+        dlembed_getdocuments(dlembed_framesList[i], documentList);
     }
 
     return documentList;
 }
 
-function update_dlembedicon() {
+function dlembed_update_icon() {
 	var icon = document.getElementById("dlembed-button");
-	var embeds = num_embedded();
+	if (!icon) {
+		return;
+	}
+	var embeds = dlembed_num_embs();
 	switch(embeds) {
 		case 0:
 			icon.setAttribute("status", "no_items");
@@ -39,8 +46,8 @@ function update_dlembedicon() {
 	}
 }
 	
-function num_embedded() {
-	var dlembedded_els = get_all_embedded();
+function dlembed_num_embs() {
+	var dlembedded_els = dlembed_get_emb();
 	return dlembedded_els.length;
 }
 
@@ -48,7 +55,7 @@ const nsIWindowMediator = Components.interfaces.nsIWindowMediator;
 
 /* This is from the tasksOverlay.js from mozilla 
  */
-function open_dlmanager() {
+function dlembed_open_dlmanager() {
 	var dlmgr = Components.classes['@mozilla.org/download-manager;1'].getService(Components.interfaces.nsIDownloadManager); 
 
 	var windowMediator = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService();
@@ -69,11 +76,11 @@ function open_dlmanager() {
 	}
 }
 
-function get_all_embedded() {
-	var docs = webdeveloper_getDocuments(window.content, new Array());
+function dlembed_get_emb() {
+	var docs = dlembed_getdocuments(window.content, new Array());
 	var embeds = new Array();
 		
-	count = 0;
+	var count = 0;
 	for (var j = 0; j < docs.length; j++) {
 		var this_embeds = docs[j].getElementsByTagName("embed");
 		for (var k = 0; k < this_embeds.length; k++) {
@@ -84,39 +91,91 @@ function get_all_embedded() {
 	return embeds;
 }
 
-function download_urls(url_list, index) {
-	if (index == url_list.length) return;
-	window.setTimeout(function() {
-		saveURL(url_list[index], "");
-		download_urls(url_list, index + 1);
-	}, 100);
-}
-
-function dlembed_dlall() {
-	var embeds = get_all_embedded();
-	if (embeds.length == 0) return;
+function dlembed_geturls() {
+	var url_list = new Array();
+	var embeds = dlembed_get_emb();
+	if (embeds.length == 0) return url_list;
 	var i = 0;
 	var url;
-	var url_list = new Array();
 	for (i = 0; i < embeds.length; i++) {
 		url = makeURLAbsolute(embeds[i][1].baseURI, embeds[i][0].src);
 		url_list.push(url);
 	}
-	open_dlmanager();
-	window.setTimeout(function() { 
-		download_urls(url_list, 0); 
-	}, 100);
+	return url_list;
+}
+
+function dlembed_dlall() {
+	var url_list = dlembed_geturls(window);
+
+	var x = 0;
+
+	dlembed_open_dlmanager();
+	for (x = 0; x < url_list.length; x++) {
+		window.saveURL(url_list[x], "");
+	}
+}
+
+function dlembed_vu_win_load() {
+	var url_list = window.arguments[0];
+
+	var x = 0;
+
+	var vulist = document.getElementById("dlembed_vu_list");
+	if (!vulist) {
+		alert ("Dlembed Viewurl list is null!");
+		return;
+	}
+
+	for (x = 0; x < url_list.length; x++) {
+		var li = document.createElement("listitem");
+		li.setAttribute("label", url_list[x]);
+		vulist.appendChild(li);
+	}
+
+	window.focus();
+}
+
+function dlembed_vu_dl_item() {
+	var vulist = document.getElementById("dlembed_vu_list");
+	if (!vulist) {
+		alert ("Dlembed Viewurl list is null!");
+		return;
+	}
+
+	var items = vulist.selectedItems;
+
+	if (!items.length) {
+		alert("Please select item(s) to download.");
+		return;
+	}
+
+	dlembed_open_dlmanager();
+
+	var x = 0;
+	for (x = 0; x < items.length; x++) {
+		var label = items[x].getAttribute("label");
+		if (!label) {
+			continue;
+		}
+		window.opener.saveURL(label, "");
+	}
 }
 
 function dlembed_viewall() {
+	var url_list = dlembed_geturls();
+	var mywin = window.openDialog("chrome://dlembed/content/dlembedViewurls.xul",
+	  "dlembed_viewurls", 
+	  "chrome,width=600,height=150,alwaysRaised",
+	  url_list, window);
+	mywin.focus();
 }
 
 window.addEventListener("load", function(evt) { 
-	update_dlembedicon();
+	dlembed_update_icon();
 	return true;
 }, true);
 
 window.addEventListener("focus", function(evt) {
-	update_dlembedicon();
+	dlembed_update_icon();
 	return true;
 }, true);
