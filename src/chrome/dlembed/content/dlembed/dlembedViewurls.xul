@@ -13,6 +13,7 @@
 <vbox flex="1" >
 	<listbox flex="1" id="dlembed_vu_list" seltype="multiple" />
 	<hbox>
+		<button id="dlembed_vu_close" label="Close" onclick="window.close();" />
 		<spacer flex="1"/>
 		<button id="dlembed_vu_dl" label="Download" onclick="dlembed_vu_dl_item();" />
 	</hbox>
