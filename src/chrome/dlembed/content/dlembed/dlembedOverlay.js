@@ -117,6 +117,9 @@ function dlembed_dlall() {
 
 function dlembed_vu_win_load() {
 	var url_list = window.arguments[0];
+	var colors = new Array(2);
+	colors[0] = "#eef";
+	colors[1] = "#fff";
 
 	var x = 0;
 
@@ -129,10 +132,42 @@ function dlembed_vu_win_load() {
 	for (x = 0; x < url_list.length; x++) {
 		var li = document.createElement("listitem");
 		li.setAttribute("label", url_list[x]);
+		// li.style.backgroundColor = colors[x % 2];
 		vulist.appendChild(li);
 	}
 
 	window.focus();
+}
+
+function dlembed_vu_copy_item() {
+	var vulist = document.getElementById("dlembed_vu_list");
+	if (!vulist) {
+		alert ("Dlembed Viewurl list is null!");
+		return;
+	}
+
+	var items = vulist.selectedItems;
+
+	if (!items.length) {
+		return;
+	}
+
+	var string = "";
+	var x = 0;
+	for (x = 0; x < items.length; x++) {
+		var label = items[x].getAttribute("label");
+		if (!label) {
+			continue;
+		}
+		if (string.length) {
+			string = string + "\n";
+		}
+		string = string + label;
+	}
+
+	var clipboard = Components.classes["@mozilla.org/widget/clipboardhelper;1"]
+	                          .getService(Components.interfaces.nsIClipboardHelper );
+	clipboard.copyString(string);
 }
 
 function dlembed_vu_dl_item() {

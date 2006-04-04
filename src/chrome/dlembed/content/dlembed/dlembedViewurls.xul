@@ -15,6 +15,7 @@
 	<hbox>
 		<button id="dlembed_vu_close" label="Close" onclick="window.close();" />
 		<spacer flex="1"/>
+		<button id="dlembed_vu_copy" label="Copy to Clipboard" onclick="dlembed_vu_copy_item();" />
 		<button id="dlembed_vu_dl" label="Download" onclick="dlembed_vu_dl_item();" />
 	</hbox>
 </vbox>
