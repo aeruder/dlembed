@@ -7,7 +7,7 @@ xmlns:em="http://www.mozilla.org/2004/em-rdf#">
 
 		<em:id>dlembed@aeruder.net</em:id>
 		<em:name>Download Embedded</em:name>
-		<em:version>0.4</em:version>
+		<em:version>0.5</em:version>
 		<em:description>Downloads all embedded objects on a webpage.</em:description>
 		<em:creator>Andrew Ruder</em:creator>
 		<em:homepageURL>http://extensions.aeruder.net</em:homepageURL>
