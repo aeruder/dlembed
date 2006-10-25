@@ -200,7 +200,7 @@ function dlembed_viewall() {
 	var url_list = dlembed_geturls();
 	var mywin = window.openDialog("chrome://dlembed/content/dlembedViewurls.xul",
 	  "dlembed_viewurls", 
-	  "chrome,width=600,height=150,close,titlebar",
+	  "dialog=no,chrome,width=600,height=150",
 	  url_list, window);
 	mywin.focus();
 }

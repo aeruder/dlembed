@@ -4,9 +4,8 @@ echo "THIS MUST BE RAN FROM CURRENT DIRECTORY"
 sleep 2
 
 rm -f dlembed.xpi
-rm -fr build
-mkdir build
+rsync -avr --exclude ".svn/" --delete src/ build/
+
 cd build
-rsync -avr --exclude ".svn/" ../src/ .
 find . | grep -v '/\.' | zip -9 -@ ../dlembed.xpi
 

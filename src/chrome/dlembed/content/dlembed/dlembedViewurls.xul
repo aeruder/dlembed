@@ -10,10 +10,9 @@
 
 <script type="application/x-javascript" src="chrome://dlembed/content/dlembedOverlay.js" />
 
-<vbox flex="1" >
+<vbox flex="1" style="padding: 4px 16px">
 	<listbox flex="1" id="dlembed_vu_list" seltype="multiple" />
 	<hbox>
-		<button id="dlembed_vu_close" label="Close" onclick="window.close();" />
 		<spacer flex="1"/>
 		<button id="dlembed_vu_copy" label="Copy to Clipboard" onclick="dlembed_vu_copy_item();" />
 		<button id="dlembed_vu_dl" label="Download" onclick="dlembed_vu_dl_item();" />
